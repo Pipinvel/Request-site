@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-------------------------------------------------------------------------------------- This is CSS -->
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            color: #060606;
+        }
+        a{
+            color: black;
+            margin-right: 30px;
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        header{
+            height: 100px;
+        }
+        .fixed-container{
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 100%;
+        }
+        header > div{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button{
+            background-color: transparent;
+            font-size: 14px;
+            padding: 15px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .light-button{
+            border: 1px solid black;
+        }
+        .dark-button{
+            border: 1px solid #9f609f;
+            color: white;
+            background-color: #9f609f;
+        }
+        .first-block > div{
+            height: 500px;
+            background-image: url('/img/skillbox-image.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        h1{
+            font-size: 48px;
+            margin-bottom: 20px ;
+        }
+        h2{
+            font-size: 30px;
+        }
+        .first-block p {
+            margin-bottom: 20px;
+        }
+        .Services{
+            height: 250px;
+            width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+        .Services div{
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .Services img{
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+            margin-bottom: 20px;
+        }
+        .layout-container{
+            position: fixed;
+            background-color: #9f609fbd;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .layout{
+            background-color: aliceblue;
+            border-radius: 10px;
+            width: 400px;
+            padding: 20px;
+            padding-right: 35px;
+        }
+        .layout input{
+            width: 100%;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding: 5px;
+        }
+        .layout h2{
+            font-size: 28px;
+            margin-bottom: 20px;
+            margin-top: 0px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+
+<!-------------------------------------------------------------------------------------- This is JavaScript -->
+    <script>
+        $(function(){
+            let LayoutContainer = $('.layout-container');
+            
+            $('button').on('click', function(){
+                LayoutContainer.css('display', 'flex');
+            });
+        
+            LayoutContainer.on('click', function(e){
+                if (this === e.target) {
+                    LayoutContainer.css('display', 'none');
+                }
+            });
+        
+            $('.layout button').on('click', function(){
+                let request = {
+                    'name' : $('.layout input[name="name"]').val(),
+                    'email' : $('.layout input[name="email"]').val()
+                };
+        
+                $.post('/api.php', request, function(response){
+                    if (response === '1') {
+                        // Handle success here, e.g., display a success message.
+                        console.log('Request successful!');
+                        
+                        // Hide the form
+                        LayoutContainer.css('display', 'none');
+                    } else {
+                        alert('Что-то пошло не так :(');
+                    }
+                });
+                
+            });
+        });
+        
+    </script>
+</head>
+<!-------------------------------------------------------------------------------------- This is HTML -->
+<body>
+    <div class="layout-container">
+        <div class="layout">
+            <h2>Отправить заявку</h2> 
+            <input type="text" name="name" placeholder=" Ваше имя">
+            <input type="email" name="email" placeholder="Ваш e-mail">
+            <button class="light-button">Отправить</button>
+        </div>
+    </div>
+    <header>
+        <div class="fixed-container">
+            <nav>
+                <a href="#">Услуги</a>
+                <a href="#">Портфолио</a>
+                <a href="#">Стоимость</a>
+            </nav>
+            <div>
+                +996 507 701 929
+                &nbsp; &nbsp; &nbsp;
+                <button class="light-button">Кнопка в светлое будущее</button>
+            </div>
+        </div>
+    </header>
+    <section class="first-block">
+        <div class="fixed-container">
+            <h1>Pipin Horoshiy</h1>
+            <p>Как только начнешь жалеть себя, твоя жизнь превратится в череду бесконечного кошмара.</p>
+            <button class="dark-button">Кнопка Sugar pony</button>
+        </div>
+    </section>
+    <section>
+        <div class="fixed-container">
+            <h2>Что я делаю</h2>
+            <div class="Services">
+                <div>
+                    <img src="/img/honey.jpg">
+                    <br>
+                    Так сладок мед, что наконец он горек. Избыток вкуса убивает вкус.</div>
+                <div>
+                    <img src="/img/earth.jpg"><br>
+                    Earth breaths, listen close.</div>
+                <div>
+                    <img src="/img/home.jpg"><br>
+                    Нужно работать, чтобы твои родители могли отдохнуть.</div>
+                <div>
+                    <img src="/img/art.jpg"><br>
+
+                    Everyting you create matters.</div>
+            </div>
+            <button class="light-button">Crazy horse</button>
+        </div>
+    </section>
+</body>
+</html>
